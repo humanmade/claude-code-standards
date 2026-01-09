@@ -1,0 +1,13 @@
+{
+  "name": "hm-standards",
+  "owner": {
+    "name": "Human Made"
+  },
+  "plugins": [
+    {
+      "name": "human-made-standards",
+      "source": "..",
+      "description": "Human Made coding standards and development workflows for WordPress/Altis projects"
+    }
+  ]
+}
