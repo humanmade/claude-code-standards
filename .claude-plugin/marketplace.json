@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "human-made-standards",
-      "source": "..",
+      "source": "./",
       "description": "Human Made coding standards and development workflows for WordPress/Altis projects"
     }
   ]
