@@ -45,10 +45,10 @@ Or add to project settings for automatic prompting:
 - **hm-coding-philosophy** - Core engineering principles, code quality hierarchy, simplicity guidelines
 
 ### Language-Specific (loaded on demand)
-- **php-human-made** - PHP/WordPress coding standards, PHPCS HM-Minimum, bootstrap patterns
-- **javascript-human-made** - ES6+ conventions, modern JavaScript patterns
-- **react-human-made** - Functional components, hooks, PropTypes, WordPress block editor
-- **css-scss-human-made** - BEM naming, CSS custom properties, theme.json integration
+- **php-standards** - PHP/WordPress coding standards, PHPCS HM-Minimum, bootstrap patterns
+- **javascript-standards** - ES6+ conventions, modern JavaScript patterns
+- **react-standards** - Functional components, hooks, PropTypes, WordPress block editor
+- **css-scss-standards** - BEM naming, CSS custom properties, theme.json integration
 
 ### Platform-Specific (loaded on demand)
 - **altis-development** - Altis DXP local development, architecture, CLI commands
@@ -64,8 +64,8 @@ Or add to project settings for automatic prompting:
 
 Skills are loaded on-demand based on context. Claude reads the skill descriptions and loads relevant skills when:
 
-- Writing PHP code → loads `php-human-made`
-- Working on React components → loads `react-human-made`
+- Writing PHP code → loads `php-standards`
+- Working on React components → loads `react-standards`
 - Running `composer server` commands → loads `altis-development`
 - Asked to lint or check code quality → loads `run-linters`
 - Writing a README, ADR or handbook page → loads `documentation-standards`
