@@ -54,6 +54,9 @@ Or add to project settings for automatic prompting:
 - **altis-development** - Altis DXP local development, architecture, CLI commands
 - **vip-development** - WordPress VIP environment, vip-cli, constraints
 
+### Cross-Cutting (loaded on demand)
+- **documentation-standards** - Writing prose, instructions and code examples for docs, ADRs and handbook pages
+
 ### Utilities
 - **run-linters** - Discover and run project linters (PHPCS, PHPStan, ESLint, Stylelint)
 
@@ -65,6 +68,7 @@ Skills are loaded on-demand based on context. Claude reads the skill description
 - Working on React components → loads `react-human-made`
 - Running `composer server` commands → loads `altis-development`
 - Asked to lint or check code quality → loads `run-linters`
+- Writing a README, ADR or handbook page → loads `documentation-standards`
 
 The `hm-coding-philosophy` skill has a broad description and loads more frequently for general code quality guidance.
 
