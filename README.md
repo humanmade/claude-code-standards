@@ -127,7 +127,7 @@ App ID: your-app-id
 
 1. Clone this repository.
 2. Edit or add skills in `skills/*/SKILL.md`. Each skill is a directory containing a `SKILL.md` with `name` and `description` frontmatter.
-3. Record the change in [CHANGELOG.md](CHANGELOG.md) and bump the version in `.claude-plugin/plugin.json`.
+3. Record the change in [CHANGELOG.md](CHANGELOG.md), bumping the version heading if the release is not yet published.
 4. Commit and push.
 
 Team members pick up the change with `npx skills update`.

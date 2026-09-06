@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Installation instructions now use the `npx skills` CLI instead of the Claude Code plugin marketplace
 
+### Removed
+- `.claude-plugin/` marketplace and plugin manifests, which the `npx skills` install path does not use. The version is now tracked in this changelog alone.
+
 ### Fixed
 - Corrected skill names in the README and 0.1.0 changelog entry to match the directories in `skills/`
 
