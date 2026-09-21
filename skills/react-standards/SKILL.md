@@ -1,6 +1,6 @@
 ---
-name: react-human-made
-description: Human Made React component standards. Apply when writing React components, reviewing React code, or building WordPress block editor interfaces. Covers functional components, hooks, PropTypes, and component organization.
+name: react-standards
+description: Human Made React conventions — functional components with hooks, semantic HTML, props and state, component organisation, block editor interfaces. Use when writing or reviewing a React component, structuring a component directory, or building WordPress block editor UI.
 ---
 
 # Human Made React Standards

@@ -1,6 +1,6 @@
 ---
 name: altis-development
-description: Altis DXP development environment and architecture. Apply when working on Altis projects, running local development commands, or understanding Altis project structure. Covers local server commands, mu-plugins architecture, asset handling, and deployment.
+description: Altis DXP projects — local server commands, mu-plugins architecture, asset handling and deploys. Use when a project has an Altis config or `composer server` scripts, or when asked to start or stop the local server, run WP-CLI, open a database shell, tail logs, or run a PHP script in WordPress context on Altis.
 ---
 
 # Altis DXP Development

@@ -1,6 +1,6 @@
 ---
-name: css-scss-human-made
-description: Human Made CSS and SCSS standards. Apply when writing styles, reviewing CSS/SCSS, or working on theme styling. Covers BEM naming, CSS custom properties, theme.json integration, and Stylelint configuration.
+name: css-scss-standards
+description: Human Made CSS and SCSS conventions — BEM class naming, custom properties, theme.json integration, Stylelint config. Use when writing or reviewing styles, adding a stylesheet or SCSS partial, naming classes, wiring theme.json tokens, or when asked whether some CSS follows HM standards.
 ---
 
 # Human Made CSS/SCSS Standards

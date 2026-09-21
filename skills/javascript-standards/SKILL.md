@@ -1,6 +1,6 @@
 ---
-name: javascript-human-made
-description: Human Made JavaScript coding standards. Apply when writing JavaScript or TypeScript, reviewing JS code, or working on frontend features. Covers ES6+ conventions, modern patterns, and ESLint configuration.
+name: javascript-standards
+description: Human Made JavaScript and TypeScript conventions — ES6+ patterns, module organisation, ESLint config, WordPress integration. Use when writing or reviewing JS or TS, adding a module, or when asked whether some JavaScript follows HM standards.
 ---
 
 # Human Made JavaScript Standards

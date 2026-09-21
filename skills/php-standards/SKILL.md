@@ -1,6 +1,6 @@
 ---
-name: php-human-made
-description: Human Made PHP coding standards for WordPress development. Apply when writing PHP, reviewing PHP code, or working on WordPress plugins and themes. Covers PHPCS HM-Minimum ruleset, namespacing conventions, bootstrap patterns, type hints, and file organization.
+name: php-standards
+description: Human Made PHP conventions for WordPress — namespaced procedural code, the bootstrap pattern, file naming, type hints, the HM-Minimum PHPCS ruleset, and input/output security. Use when writing or reviewing PHP in a plugin or theme, adding a feature namespace or bootstrap, or when asked whether some PHP follows HM standards.
 ---
 
 # Human Made PHP Standards
