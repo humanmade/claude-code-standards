@@ -1,6 +1,6 @@
 ---
 name: run-linters
-description: Discover and run code linters for the current project. Use when asked to lint code, check code quality, run static analysis, or after completing a feature. Detects PHPCS, PHPStan, ESLint, and Stylelint configurations and runs appropriate checks.
+description: Discover and run a project's linters — PHPCS, PHPStan, ESLint, Stylelint. Use when asked to lint, run the linters, check code quality, run static analysis, fix coding standard violations, or verify changes before opening a pull request. Prefers the project's own composer or npm script over calling the binary.
 ---
 
 # Run Project Linters

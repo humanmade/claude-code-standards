@@ -1,6 +1,6 @@
 ---
 name: vip-development
-description: WordPress VIP development environment and architecture. Apply when working on VIP projects, running VIP CLI commands, or understanding VIP project structure. Covers vip-cli, client-mu-plugins architecture, and VIP-specific constraints.
+description: WordPress VIP projects — vip-cli commands, client-mu-plugins architecture, and VIP platform constraints. Use when a project has a VIP structure, or when asked to run vip-cli, reach WP-CLI or the database on a VIP application, tail logs, work with the local dev-env, or check whether something is permitted on VIP.
 ---
 
 # WordPress VIP Development

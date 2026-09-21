@@ -1,6 +1,6 @@
 ---
 name: hm-coding-philosophy
-description: Human Made engineering principles and code quality standards. Apply when writing code, reviewing code, planning implementations, or discussing architecture. Covers code quality priorities, simplicity over complexity, and avoiding over-engineering.
+description: Human Made engineering principles — what to prioritise when code quality trades off, why simple beats clever, and how to spot over-engineering. Use when choosing between implementation approaches, reviewing a design or PR for unnecessary complexity, justifying a simpler option, or when asked what HM's position on something is.
 ---
 
 # Human Made Coding Philosophy
