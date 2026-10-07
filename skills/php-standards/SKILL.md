@@ -76,11 +76,12 @@ For anything security-related, prefer a per-line `phpcs:ignore` with a reason ov
 
 ```php
 // Table names cannot be parameterised through wpdb::prepare().
+$table = $wpdb->prefix . 'my_table';
 // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name is not user input
-$rows = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}my_table" );
+$rows = $wpdb->get_results( "SELECT * FROM {$table}" );
 ```
 
-Some projects need two exclusions whatever the team prefers. The I18n exclusion applies on PHP 8 with WPCS 2.x. The file name exclusions apply to projects that use PSR-4 autoloading:
+Some projects need two exclusions whatever the team prefers. The I18n exclusion applies only to projects still on WPCS 2.x with PHP 8. The current HM standard uses WPCS 3, where the sniff runs without crashing, so keep it there. The file name exclusions apply to projects that use PSR-4 autoloading:
 
 ```xml
 <rule ref="HM">
@@ -230,4 +231,4 @@ Items 3 and 4 pass the method name as a string rather than a symbol, so no stati
 grep -rn 'myMethod' includes/ tests/
 ```
 
-Renaming a parameter breaks every call that passes it by name, such as `make_helper( myParam: 7 )`. PHP throws an "Unknown named parameter" error when that call runs. Update the declaration, its uses in the function body, and every named-argument call site.
+Renaming a parameter breaks every call that passes it by name, such as `make_helper( myParam: 7 )`. PHP throws an "Unknown named parameter" error when that call runs. PHPStan reports these calls, so run it after the rename. Update the declaration, its uses in the function body, and every named-argument call site.
