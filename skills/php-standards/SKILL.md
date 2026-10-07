@@ -80,7 +80,7 @@ For anything security-related, prefer a per-line `phpcs:ignore` with a reason ov
 $rows = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}my_table" );
 ```
 
-Two exclusions are genuinely unavoidable rather than a preference:
+Some projects need two exclusions whatever the team prefers. The I18n exclusion applies on PHP 8 with WPCS 2.x. The file name exclusions apply to projects that use PSR-4 autoloading:
 
 ```xml
 <rule ref="HM">
@@ -104,7 +104,7 @@ Treat anything beyond these as a project decision to argue for in review.
 
 ## Fixing violations
 
-Run the fixer first, then work through what remains grouped by sniff name. The same sniff usually fires many times and takes one fix pattern.
+Run `vendor/bin/phpcbf` first. It fixes formatting errors automatically, which shortens the list you fix by hand. Then work through what remains grouped by sniff name. The same sniff usually fires many times and takes one fix pattern.
 
 ### `Generic.Commenting.DocComment.MissingShort`
 
@@ -171,7 +171,7 @@ The long description — the second paragraph of a docblock — starts with a ca
 
 ### `HM.Security.ValidatedSanitizedInput.MissingUnslash`
 
-Unslash `$_GET` and `$_POST` values before sanitising them.
+Unslash `$_GET` and `$_POST` values before sanitising them. WordPress adds slashes to request data, so a value sanitised without unslashing is saved with backslashes in it.
 
 ```php
 // Bad
@@ -186,7 +186,8 @@ $value = sanitize_text_field( wp_unslash( $_POST['field'] ?? '' ) );
 Match the sanitiser to the data type.
 
 ```php
-// Integers — absint() satisfies the sniff, an (int) cast does not
+// Integers — absint() satisfies the sniff, an (int) cast does not,
+// because the sniff only recognises sanitising functions
 $id = absint( $_POST['id'] ?? 0 );
 
 // Text
@@ -199,7 +200,7 @@ $body = sanitize_textarea_field( wp_unslash( $_POST['body'] ?? '' ) );
 $action = sanitize_key( $_POST['action'] ?? '' );
 ```
 
-Where the receiving function does the validation, say so in the ignore:
+Where the receiving function does the validation, say so in the ignore. Without a reason, a reviewer cannot tell a deliberate choice from a missed sanitiser:
 
 ```php
 // phpcs:ignore HM.Security.ValidatedSanitizedInput.InputNotSanitized -- validated by the importer
@@ -208,7 +209,7 @@ $raw = wp_unslash( $_POST['payload'] ?? '' );
 
 ### `HM.Functions.NamespacedFunctions.MissingNamespace`
 
-Functions live in a namespace. Where an include file deliberately defines a global helper, suppress it on the declaration with a reason:
+Functions live in a namespace, because a global function name can collide with another plugin's and cause a fatal error. Where an include file deliberately defines a global helper, suppress it on the declaration with a reason:
 
 ```php
 function my_helper(): void { // phpcs:ignore HM.Functions.NamespacedFunctions.MissingNamespace -- admin include
@@ -229,4 +230,4 @@ Items 3 and 4 pass the method name as a string rather than a symbol, so no stati
 grep -rn 'myMethod' includes/ tests/
 ```
 
-Renaming a parameter has the same problem. Update the declaration, its uses in the function body, and every named-argument call site such as `make_helper( myParam: 7 )`.
+Renaming a parameter breaks every call that passes it by name, such as `make_helper( myParam: 7 )`. PHP throws an "Unknown named parameter" error when that call runs. Update the declaration, its uses in the function body, and every named-argument call site.
