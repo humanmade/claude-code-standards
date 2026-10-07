@@ -81,16 +81,12 @@ $table = $wpdb->prefix . 'my_table';
 $rows = $wpdb->get_results( "SELECT * FROM {$table}" );
 ```
 
-Some projects need two exclusions whatever the team prefers. The I18n exclusion applies only to projects still on WPCS 2.x with PHP 8. The current HM standard uses WPCS 3, where the sniff runs without crashing, so keep it there. The file name exclusions apply to projects that use PSR-4 autoloading:
+On PHP 8, use humanmade/coding-standards 2.x. Version 1.x pins WPCS 2.x, and PHPCS crashes with a `trim(null)` deprecation in the PHPCompatibility and `WordPress.WP.I18n` sniffs. Excluding `WordPress.WP.I18n` does not stop the crash, because PHPCompatibility fails first.
+
+Projects that use PSR-4 autoloading need one exclusion whatever the team prefers:
 
 ```xml
 <rule ref="HM">
-    <!--
-        The sniff crashes on PHP 8.x with WPCS 2.x — a trim(null)
-        deprecation inside the sniff itself.
-    -->
-    <exclude name="WordPress.WP.I18n"/>
-
     <!--
         PSR-4 autoloading uses PascalCase file names; these sniffs
         assume the WordPress hyphenated-lower convention.
@@ -101,7 +97,7 @@ Some projects need two exclusions whatever the team prefers. The I18n exclusion 
 </rule>
 ```
 
-Treat anything beyond these as a project decision to argue for in review.
+Treat any other exclusion as a project decision to argue for in review.
 
 ## Fixing violations
 
@@ -218,14 +214,14 @@ function my_helper(): void { // phpcs:ignore HM.Functions.NamespacedFunctions.Mi
 
 ## Renaming methods to snake_case
 
-HM standards require snake_case method names. A rename touches more than the declaration, and missing one of these leaves a fatal error that no linter catches:
+HM standards require snake_case method names. A rename touches more than the declaration, and missing one of these leaves a fatal error that PHPCS does not catch:
 
 1. The declaration — `public function myMethod(` becomes `public function my_method(`
 2. Every call site — `->myMethod(`
 3. Hook and callback registrations — `[ $this, 'myMethod' ]`
 4. Test doubles — Mockery's `shouldReceive( 'myMethod' )`
 
-Items 3 and 4 pass the method name as a string rather than a symbol, so no static analysis finds them. Grep the whole tree for the old name before you consider a rename done:
+Items 3 and 4 pass the method name as a string rather than a symbol. PHPStan reports a stale hook callback only at level 9 with WordPress stubs, and does not report a stale Mockery expectation at all. Grep the whole tree for the old name before you consider a rename done:
 
 ```sh
 grep -rn 'myMethod' includes/ tests/
