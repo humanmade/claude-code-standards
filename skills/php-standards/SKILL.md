@@ -222,12 +222,11 @@ HM standards require snake_case method names. A rename touches more than the dec
 2. Every call site — `->myMethod(`
 3. Hook and callback registrations — `[ $this, 'myMethod' ]`
 4. Test doubles — Mockery's `shouldReceive( 'myMethod' )`
-5. Named arguments at call sites — `make_helper( myParam: 7 )`
 
-Items 3, 4 and 5 pass the method name as a string or a label rather than a symbol, so no static analysis finds them. Grep the whole tree for the old name before you consider a rename done:
+Items 3 and 4 pass the method name as a string rather than a symbol, so no static analysis finds them. Grep the whole tree for the old name before you consider a rename done:
 
 ```sh
 grep -rn 'myMethod' includes/ tests/
 ```
 
-The same applies to renaming a parameter: update the declaration, every `$this->` reference to it, and any named-argument call sites.
+Renaming a parameter has the same problem. Update the declaration, its uses in the function body, and every named-argument call site such as `make_helper( myParam: 7 )`.
