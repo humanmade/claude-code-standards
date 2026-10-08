@@ -67,3 +67,36 @@ PHPStan is used for static analysis:
 - Level: 5 (typical)
 - Config file: `phpstan.neon` or `phpstan.neon.dist`
 - Run with: `composer run phpstan` or `vendor/bin/phpstan analyse`
+
+When PHPCS reports violations, read [references/fixing-violations.md](references/fixing-violations.md) for the fix pattern for each sniff.
+
+## Ruleset exclusions
+
+Every `<exclude>` in a project's `phpcs.xml` carries a comment saying why. An exclusion without a reason becomes permanent, because the next person cannot tell a considered trade-off from a rule someone found annoying.
+
+For anything security-related, prefer a per-line `phpcs:ignore` with a reason over a project-wide `<exclude>`. A project-wide exclusion silences the sniff everywhere, including the places where it would have caught a real bug:
+
+```php
+// Table names cannot be parameterised through wpdb::prepare().
+$table = $wpdb->prefix . 'my_table';
+// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name is not user input
+$rows = $wpdb->get_results( "SELECT * FROM {$table}" );
+```
+
+On PHP 8, use humanmade/coding-standards 2.x. Version 1.x pins WPCS 2.x, and PHPCS crashes with a `trim(null)` deprecation in the PHPCompatibility and `WordPress.WP.I18n` sniffs. Excluding `WordPress.WP.I18n` does not stop the crash, because PHPCompatibility fails first.
+
+Projects that use PSR-4 autoloading need one exclusion whatever the team prefers:
+
+```xml
+<rule ref="HM">
+    <!--
+        PSR-4 autoloading uses PascalCase file names; these sniffs
+        assume the WordPress hyphenated-lower convention.
+    -->
+    <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+    <exclude name="HM.Files.ClassFileName.MismatchedName"/>
+</rule>
+```
+
+Treat any other exclusion as a project decision to argue for in review.
